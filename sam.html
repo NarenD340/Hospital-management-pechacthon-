@@ -1,0 +1,79 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hospital Resource Optimiser — PWA</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Hospital Resource Optimiser</h1>
+    <p class="subtitle">Real-time PWA dashboard with predictive analytics</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <label>Simulation speed:
+        <select id="speed">
+          <option value="3000">Slow (3s)</option>
+          <option value="1500" selected>Normal (1.5s)</option>
+          <option value="600">Fast (0.6s)</option>
+        </select>
+      </label>
+      <button id="toggleSim">Pause</button>
+      <button id="reset">Reset Data</button>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h2>Oxygen (L remaining)</h2>
+        <div class="big" id="oxygenValue">—</div>
+        <canvas id="oxygenChart"></canvas>
+      </div>
+      <div class="card">
+        <h2>Beds Available</h2>
+        <div class="big" id="bedsValue">—</div>
+        <canvas id="bedsChart"></canvas>
+      </div>
+      <div class="card">
+        <h2>Staff On Duty</h2>
+        <div class="big" id="staffValue">—</div>
+        <canvas id="staffChart"></canvas>
+      </div>
+    </section>
+
+    <section class="prediction">
+      <h3>Predictions (next 6 intervals)</h3>
+      <div id="predictionTable"></div>
+      <p class="note">Prediction uses lightweight linear regression on recent values. Demo simulates data locally.</p>
+    </section>
+  </main>
+
+  <footer>
+    <small>PWA Demo • Not for clinical use • Generated: 2025</small>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker registered"))
+        .catch(err => console.error("SW registration failed:", err));
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
